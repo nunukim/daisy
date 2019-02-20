@@ -1,5 +1,6 @@
 import os
 import json
+import time
 
 from luigi import *
 import luigi
@@ -34,6 +35,35 @@ class Task(luigi.Task):
         else:
             return None
 
+    def iter_with_progress(self, iterable, length=None):
+        if length is None:
+            try:
+                length = len(iterable)
+            except AttributeError:
+                length = None
 
+        start_time = time.time()
+        last_time = start_time
+
+        def _set_status(stat, i):
+            if length is not None:
+                perc = i*100.0/length
+                self.set_status_message("{}: {:,d} / {:,d} ({:0.1f}%)".format(stat, i, length, perc))
+                self.set_progress_percentage(perc)
+            else:
+                self.set_status_message("{}: {:,d} / ???".format(stat, i))
+
+        _set_status("starting", 0)
+        update_span = conf().progress_update_span 
+
+        for i, elm in enumerate(iter(iterable)):
+            now = time.time()
+            if now - last_time >= update_span:
+                _set_status("running", i)
+                last_time = now
+
+            yield elm
+
+        _set_status("finishing", i+1)
 
 
