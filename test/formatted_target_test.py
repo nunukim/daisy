@@ -3,7 +3,7 @@ import shutil
 import os
 
 from daisy.formatted_target import get_formatted_class
-from daisy.formatted_target import CsvTarget, NpyTarget, JsonTarget, PickleTarget
+from daisy.formatted_target import CsvTarget, NpyTarget, JsonTarget, PickleTarget, FeatherTarget
 
 import pandas as pd
 import numpy as np
@@ -72,3 +72,10 @@ class TestTarget(ut.TestCase):
         self.assertEqual(obj2.a(), 1)
         self.assertEqual(obj2.b, "b")
 
+    def test_feather_target(self):
+        obj = pd.DataFrame(np.arange(25).reshape((5,5)), columns=["a","b","c","d","e"], index=[0,1,2,3,4])
+        obj2 = self._save_and_load("feather", FeatherTarget, obj)
+
+        np.testing.assert_array_equal(obj.values, obj2.values)
+        np.testing.assert_array_equal(obj.index, obj2.index)
+        np.testing.assert_array_equal(obj.columns, obj2.columns)

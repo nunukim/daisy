@@ -90,7 +90,20 @@ class PickleTarget(FormattedLocalTargetBase):
         with open(self.path, "wb") as fn:
             pickle.dump(obj, fn, **kwargs)
 
+@_register_ext("feather")
+class FeatherTarget(FormattedLocalTargetBase):
+    def _load(self, **kwargs):
+        import pandas as pd
+        if "index_col" not in kwargs:
+            kwargs["index_col"] = 0
 
+        with self.open('r') as fn:
+            return pd.read_csv(fn, **kwargs)
 
+    def _dump(self, obj, **kwargs):
+        import pandas as pd
 
+        obj = pd.DataFrame(obj)
+        with self.open('w') as fn:
+            return obj.to_csv(fn, **kwargs)
 
