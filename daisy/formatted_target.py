@@ -3,7 +3,7 @@ import copy
 
 
 def get_formatted_class(ext):
-    return _formatted_classes[ext]
+    return _formatted_classes.get(ext, FormattedLocalTargetBase)
 
 _formatted_classes = {}
 def _register_ext(ext):
@@ -78,6 +78,7 @@ class JsonTarget(FormattedLocalTargetBase):
             json.dump(obj, fn, **kwargs)
 
 @_register_ext("pkl")
+@_register_ext("pickle")
 class PickleTarget(FormattedLocalTargetBase):
     def _load(self, **kwargs):
         import pickle
