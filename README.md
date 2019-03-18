@@ -10,7 +10,6 @@ Classes inheriting `daisy.FormattedLocalTargetBase` is provided
 for dumping and loading objects by one-liner.
 
 ``` python
-# in daisy
 import daisy
 import pandas as pd
 
@@ -37,9 +36,10 @@ df2
 # 1  2  5
 # 2  3  6
 
-# `daisy.FormattedLocalTargetBase` also inherits `luigi.LocalTaget`.
+# `daisy.FormattedLocalTargetBase` also inherits `luigi.LocalTaget`
+# so that original api is also enabled.
 with targ.open("r") as fd:
-  s = fd.read()
+    s = fd.read()
 ```
 
 ## Default output for task
@@ -89,10 +89,10 @@ class TaskA(luigi.Task):
     param1 = luigi.Parameter()
 
     def output(self):
-    return {
-        "vectors": daisy.NpyTarget("./data/TaskA/TaskA(param1={}).npy".format(self.param1)),
-        "metadata": daisy.JsonTarget("./data/TaskA/TaskA(param1={}).json".format(self.param1))
-    }
+        return {
+            "vectors": daisy.NpyTarget("./data/TaskA/TaskA(param1={}).npy".format(self.param1)),
+            "metadata": daisy.JsonTarget("./data/TaskA/TaskA(param1={}).json".format(self.param1))
+            }
 ```
 
 For source codes
@@ -101,7 +101,7 @@ For source codes
 
 For configuration, edit `[daisy]` section of `luigi.cfg`.
 
-```
+``` INI
 [daisy]
 
 # default output directory
