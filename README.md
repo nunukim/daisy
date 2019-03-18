@@ -95,7 +95,18 @@ class TaskA(luigi.Task):
             }
 ```
 
-For source codes
+Available extension and file types are as follows:
+
+| Target class | Object type | extension |
+| --- | --- | --- |
+| `CsvTarget` | `pandas.DataFrame` | `csv` |
+| `NpyTarget` | `numpy.ndarray` | `npy` |
+| `JsonTarget` | `dict` | `json` |
+| `PickleTarget` | `object` | `pkl` `pickle` |
+| `FeatherTarget` | `pandas.DataFrame` | `feather` |
+
+view source code for detail.
+
 
 ## Configuration
 
