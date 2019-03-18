@@ -75,7 +75,6 @@ class TaskA(luigi.Task):
 class TaskA(daisy.Task):
     param1 = daisy.Parameter()
 
-
     ext = {
         "vectors": "npy",
         "metadata": "json"
