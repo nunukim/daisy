@@ -50,7 +50,7 @@ By setting file extension via `ext` attribute,
 daisy automatically configure corresponding `FormattedLocalTarget` with default file name.
 
 
-For example,
+### Single output
 
 ``` python
 class TaskA(daisy.Task):
@@ -69,7 +69,7 @@ class TaskA(luigi.Task):
 ```
 
 
-For multiple outputs,
+### Multiple outputs
 
 ``` python
 class TaskA(daisy.Task):
