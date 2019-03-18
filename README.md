@@ -104,7 +104,7 @@ Available extension and file types are as follows:
 | `PickleTarget` | `object` | `pkl` `pickle` |
 | `FeatherTarget` | `pandas.DataFrame` | `feather` |
 
-view source code for detail.
+view [source code](./daisy/formatted_target.py) for detail.
 
 
 ## Configuration
