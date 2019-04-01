@@ -95,16 +95,13 @@ class PickleTarget(FormattedLocalTargetBase):
 class FeatherTarget(FormattedLocalTargetBase):
     def _load(self, **kwargs):
         import pandas as pd
-        if "index_col" not in kwargs:
-            kwargs["index_col"] = 0
-
-        with self.open('r') as fn:
-            return pd.read_csv(fn, **kwargs)
+        with self.open('rb') as fn:
+            return pd.read_feather(fn, **kwargs)
 
     def _dump(self, obj, **kwargs):
         import pandas as pd
 
         obj = pd.DataFrame(obj)
-        with self.open('w') as fn:
-            return obj.to_csv(fn, **kwargs)
+        with self.open('wb') as fn:
+            return obj.to_feather(fn, **kwargs)
 
