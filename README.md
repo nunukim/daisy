@@ -89,8 +89,8 @@ class TaskA(luigi.Task):
 
     def output(self):
         return {
-            "vectors": daisy.NpyTarget("./data/TaskA/TaskA(param1={}).npy".format(self.param1)),
-            "metadata": daisy.JsonTarget("./data/TaskA/TaskA(param1={}).json".format(self.param1))
+            "vectors": daisy.NpyTarget("./data/TaskA/TaskA(param1={})/vectors.npy".format(self.param1)),
+            "metadata": daisy.JsonTarget("./data/TaskA/TaskA(param1={})/metadata.json".format(self.param1))
             }
 ```
 
