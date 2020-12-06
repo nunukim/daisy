@@ -37,7 +37,7 @@ df2
 # 2  3  6
 
 # `daisy.FormattedLocalTargetBase` also inherits `luigi.LocalTaget`
-# so that original api is also enabled.
+# so original api can also be used.
 with targ.open("r") as fd:
     s = fd.read()
 ```
@@ -104,7 +104,7 @@ Available extension and file types are as follows:
 | `PickleTarget` | `object` | `pkl` `pickle` |
 | `FeatherTarget` | `pandas.DataFrame` | `feather` |
 
-view [source code](./daisy/formatted_target.py) for detail.
+See [source code](./daisy/formatted_target.py) for detail.
 
 
 ## Configuration
